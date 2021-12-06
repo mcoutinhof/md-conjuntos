@@ -1,0 +1,7 @@
+# CMake Build Folder
+cmake-build-debug/
+build/
+
+# IDE Project Configuration Files
+.idea/
+.vscode/
