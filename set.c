@@ -30,11 +30,6 @@ void set_shrink_to_fit(void *set_ptr) {
     }
 }
 
-void set_clear(void *set_ptr) {
-    set_t set = set_ptr;
-    set->size = 0;
-}
-
 void set_insert(void *__restrict set_ptr, const void *__restrict val_ptr) {
     if (set_contains(set_ptr, val_ptr)) {
         return;
