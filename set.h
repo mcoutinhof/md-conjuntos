@@ -19,8 +19,6 @@ void set_reserve(void *set_ptr, size_t req_capacity);
 
 void set_shrink_to_fit(void *set_ptr);
 
-void set_clear(void *set_ptr);
-
 void set_insert(void *__restrict set_ptr, const void *__restrict val_ptr);
 
 bool set_contains(void *__restrict set_ptr, const void *__restrict val_ptr);

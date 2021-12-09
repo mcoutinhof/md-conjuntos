@@ -33,7 +33,7 @@ int main() {
     for (int i = 0; i < universe->capacity; ++i) {
         set_insert(universe, &i);
     }
-    //print_set("U", universe);
+    print_set("U", universe);
 
     set_pair_int_t relation = new_set(pair_int_t, 10);
     while (relation->size < relation->capacity) {
@@ -42,7 +42,7 @@ int main() {
                 .second = universe->data[rand() % universe->size],
         });
     }
-    //print_relation("R", relation);
+    print_relation("R", relation);
 
     if (set_is_reflexive(universe, relation)) {
         printf("\nA relação R é reflexiva.\n");
