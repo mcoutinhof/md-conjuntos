@@ -1,17 +1,28 @@
 #include <time.h>
 #include "set.h"
 #include "utils.h"
+#include "relation.h"
 
 set_pair_int_t set_reflexive_closure(set_int_t __restrict set, set_pair_int_t __restrict relation) {
-    relation = set_copy(relation);
-    // TODO: code
-    return relation;
+    set_pair_int_t closure = set_copy(relation);
+    for (size_t i = 0; i < set->size; i++){
+        pair_int_t reflection = {set->data[i], set->data[i]};
+        if (!set_pair_contains(closure, reflection)){
+            set_insert(closure, &reflection);
+        }
+    }
+    return closure;
 }
 
 set_pair_int_t set_symmetric_closure(set_pair_int_t __restrict relation) {
-    relation = set_copy(relation);
-    // TODO: code
-    return relation;
+    set_pair_int_t closure = set_copy(relation);
+    for (size_t i = 0; i < relation->size; i++){
+        pair_int_t symmetry = {relation->data[i].second, relation->data[i].first};
+        if (!set_pair_contains(closure, symmetry)){
+            set_insert(closure, &symmetry);
+        }
+    }
+    return closure;
 }
 
 int main() {
@@ -32,8 +43,6 @@ int main() {
     }
     print_relation("R", relation);
 
-    set_free(universe);
-
     printf("\nFeixo Reflexivo\n");
     set_pair_int_t reflexive_closure = set_reflexive_closure(universe, relation);
     print_closure("R*", reflexive_closure, relation);
@@ -45,5 +54,6 @@ int main() {
     print_closure("R*", symmetric_closure, relation);
     set_free(symmetric_closure);
 
+    set_free(universe);
     set_free(relation);
 }
