@@ -2,28 +2,28 @@
 #include "set.h"
 #include "utils.h"
 
-bool set_is_reflexive(set_int_t __restrict set, set_pair_int_t __restrict rel) {
+bool set_is_reflexive(set_int_t __restrict set, set_pair_int_t __restrict relation) {
     for (size_t i = 0; i < set->size; ++i) {
-        if (!set_contains(rel, &(pair_int_t) {set->data[i], set->data[i]})) {
+        if (!set_contains(relation, &(pair_int_t) {set->data[i], set->data[i]})) {
             return false;
         }
     }
     return true;
 }
 
-bool set_is_symmetric(set_pair_int_t __restrict rel) {
+bool set_is_symmetric(set_pair_int_t __restrict relation) {
     // TODO: code
-    return false;
+    return true;
 }
 
-bool set_is_antisymmetric(set_pair_int_t __restrict rel) {
+bool set_is_antisymmetric(set_pair_int_t __restrict relation) {
     // TODO: code
-    return false;
+    return true;
 }
 
-bool set_is_transitive(set_pair_int_t __restrict rel) {
+bool set_is_transitive(set_pair_int_t __restrict relation) {
     // TODO: code
-    return false;
+    return true;
 }
 
 int main() {
@@ -33,41 +33,42 @@ int main() {
     for (int i = 0; i < universe->capacity; ++i) {
         set_insert(universe, &i);
     }
-    print_set_int_t("U", universe);
+    //print_set("U", universe);
 
-    set_pair_int_t rel = new_set(pair_int_t, 10);
-    while (rel->size < rel->capacity) {
-        set_insert(rel, &(pair_int_t) {
+    set_pair_int_t relation = new_set(pair_int_t, 10);
+    while (relation->size < relation->capacity) {
+        set_insert(relation, &(pair_int_t) {
                 .first = universe->data[rand() % universe->size],
                 .second = universe->data[rand() % universe->size],
         });
     }
-    print_set_pair_int_t("R", rel);
+    //print_relation("R", relation);
 
-    if (set_is_reflexive(universe, rel)) {
+    if (set_is_reflexive(universe, relation)) {
         printf("\nA relação R é reflexiva.\n");
     } else {
-        printf("\nA relação R não é reflexiva.\n");
-    }
-
-    if (set_is_symmetric(rel)) {
-        printf("A relação R é simétrica.\n");
-    } else {
-        printf("A relação R não é simétrica.\n");
-    }
-
-    if (set_is_antisymmetric(rel)) {
-        printf("A relação R é antissimétrica.\n");
-    } else {
-        printf("A relação R não é antissimétrica.\n");
-    }
-
-    if (set_is_transitive(rel)) {
-        printf("A relação R é transitiva.\n");
-    } else {
-        printf("A relação R não é transitiva.\n");
+        printf("\nA relação R \033[4mnão\033[24m é reflexiva.\n");
     }
 
     set_free(universe);
-    set_free(rel);
+
+    if (set_is_symmetric(relation)) {
+        printf("A relação R é simétrica.\n");
+    } else {
+        printf("A relação R \033[4mnão\033[24m é simétrica.\n");
+    }
+
+    if (set_is_antisymmetric(relation)) {
+        printf("A relação R é antissimétrica.\n");
+    } else {
+        printf("A relação R \033[4mnão\033[24m é antissimétrica.\n");
+    }
+
+    if (set_is_transitive(relation)) {
+        printf("A relação R é transitiva.\n");
+    } else {
+        printf("A relação R \033[4mnão\033[24m é transitiva.\n");
+    }
+
+    set_free(relation);
 }

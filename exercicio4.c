@@ -2,16 +2,16 @@
 #include "set.h"
 #include "utils.h"
 
-set_pair_int_t set_reflexive_closure(set_int_t __restrict set, set_pair_int_t __restrict rel) {
-    rel = set_copy(rel);
+set_pair_int_t set_reflexive_closure(set_int_t __restrict set, set_pair_int_t __restrict relation) {
+    relation = set_copy(relation);
     // TODO: code
-    return rel;
+    return relation;
 }
 
-set_pair_int_t set_symmetric_closure(set_pair_int_t __restrict rel) {
-    rel = set_copy(rel);
+set_pair_int_t set_symmetric_closure(set_pair_int_t __restrict relation) {
+    relation = set_copy(relation);
     // TODO: code
-    return rel;
+    return relation;
 }
 
 int main() {
@@ -21,25 +21,29 @@ int main() {
     for (int i = 0; i < universe->capacity; ++i) {
         set_insert(universe, &i);
     }
-    print_set_int_t("U", universe);
+    print_set("U", universe);
 
-    set_pair_int_t rel = new_set(pair_int_t, 10);
-    while (rel->size < rel->capacity) {
-        set_insert(rel, &(pair_int_t) {
+    set_pair_int_t relation = new_set(pair_int_t, 10);
+    while (relation->size < relation->capacity) {
+        set_insert(relation, &(pair_int_t) {
                 .first = universe->data[rand() % universe->size],
                 .second = universe->data[rand() % universe->size],
         });
     }
-    print_set_pair_int_t("R", rel);
-
-    printf("\nFeixo Reflexivo\n");
-    set_pair_int_t refl = set_reflexive_closure(universe, rel);
-    print_set_pair_int_t("R*", refl);
-
-    printf("\nFeixo Simétrico\n");
-    set_pair_int_t symm = set_symmetric_closure(rel);
-    print_set_pair_int_t("R*", refl);
+    print_relation("R", relation);
 
     set_free(universe);
-    set_free(rel);
+
+    printf("\nFeixo Reflexivo\n");
+    set_pair_int_t reflexive_closure = set_reflexive_closure(universe, relation);
+    print_closure("R*", reflexive_closure, relation);
+
+    set_free(reflexive_closure);
+
+    printf("\nFeixo Simétrico\n");
+    set_pair_int_t symmetric_closure = set_symmetric_closure(relation);
+    print_closure("R*", symmetric_closure, relation);
+    set_free(symmetric_closure);
+
+    set_free(relation);
 }

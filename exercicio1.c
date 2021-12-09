@@ -47,41 +47,43 @@ int main() {
     for (int i = 0; i < universe->capacity; ++i) {
         set_insert(universe, &i);
     }
-    print_set_int_t("U", universe);
+    print_set("U", universe);
 
     set_int_t set_a = new_set(int, 10);
     while (set_a->size < set_a->capacity) {
         set_insert(set_a, &universe->data[rand() % universe->size]);
     }
-    print_set_int_t("A", set_a);
+    print_set("A", set_a);
 
     set_int_t set_b = new_set(int, 10);
     while (set_b->size < set_b->capacity) {
         set_insert(set_b, &universe->data[rand() % universe->size]);
     }
-    print_set_int_t("B", set_b);
+    print_set("B", set_b);
 
     set_int_t set_c = set_union(set_a, set_b);
-    print_set_int_t("A ∪ B", set_c);
+    print_set("A ∪ B", set_c);
     set_free(set_c);
 
     set_int_t set_d = set_intersection(set_a, set_b);
-    print_set_int_t("A ∩ B", set_d);
+    print_set("A ∩ B", set_d);
     set_free(set_d);
 
     set_int_t set_e = set_difference(set_a, set_b);
-    print_set_int_t("A − B", set_e);
+    print_set("A − B", set_e);
     set_free(set_e);
 
     set_int_t set_f = set_difference(set_b, set_a);
-    print_set_int_t("B − A", set_f);
+    print_set("B − A", set_f);
     set_free(set_f);
 
+    set_free(set_b);
+
     set_int_t set_g = set_complement(universe, set_a);
-    print_set_int_t("¬A", set_g);
+    print_set("¬A", set_g);
     set_free(set_g);
 
     set_free(universe);
     set_free(set_a);
-    set_free(set_b);
+
 }
