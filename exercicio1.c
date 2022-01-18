@@ -1,5 +1,4 @@
 #include <time.h>
-#include "set.h"
 #include "utils.h"
 
 void *set_union(set_t *set_a, set_t *set_b) {

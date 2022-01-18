@@ -1,5 +1,4 @@
 #include <time.h>
-#include "set.h"
 #include "utils.h"
 
 bool set_is_subset(set_t *set_a, set_t *set_b) {
@@ -34,7 +33,7 @@ int main() {
 
     set_free(universe);
 
-    if(set_is_subset(set_b, set_a)) {
+    if (set_is_subset(set_b, set_a)) {
         printf("\nO conjunto B é subconjunto do conjunto A.\n");
     } else {
         printf("\nO conjunto B não é subconjunto do conjunto A.\n");
