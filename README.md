@@ -9,10 +9,9 @@ algumas operações básicas, e esta foi aplicada a inteiros e pares de inteiros
 na realização dos exercícios requeridos.
 
 ### Ferramentas utilizadas
-**IDE:** CLion 2021.3  
-**Compilador:** GCC 10.3.0-1  
-**Sistema Operacional:** Pop!_OS 21.04
+**IDE:** CLion 2021.3.2  
+**Compilador:** GCC 11.2.0-7  
+**Sistema Operacional:** Pop!_OS 21.10
 
 ### Links úteis
 * [Enunciado do Trabalho Prático](https://bit.ly/3rRLpLQ)
-* [ANSI Escape Codes](https://git.io/JDeqM)

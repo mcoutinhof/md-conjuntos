@@ -1,44 +1,40 @@
 #include "set.h"
 #include "utils.h"
 
-void print_set(const char *name, set_int_t set) {
-    if (set->size == 0) {
-        printf("%s = Ø.\n", name);
+static int comparInt(const void *a, const void *b) {
+    return *(int *) a - *(int *) b;
+}
+
+void print_set(const char *name, set_t *set) {
+    if (set_size(set) == 0) {
+        printf("%s = {}.\n", name);
     } else {
-        set_sort(set);
+        set_sort(set, comparInt);
         printf("%s = {", name);
-        for (size_t i = 0; i < set->size; ++i) {
-            printf("%d, ", set->data[i]);
+        for (size_t i = 0; i < set_size(set); i++) {
+            printf("%d, ", set_at_as(set, i, int));
         }
         printf("\b\b}.\n");
     }
 }
 
-void print_relation(const char *name, set_pair_int_t relation) {
-    if (relation->size == 0) {
-        printf("%s = Ø.\n", name);
+static int comparPair(const void *_a, const void *_b) {
+    const pair_t *a = _a, *b = _b;
+    if (a->first != b->first) {
+        return a->first - b->first;
     } else {
-        set_sort(relation);
-        printf("%s = {", name);
-        for (size_t i = 0; i < relation->size; ++i) {
-            printf("(%d, %d), ", relation->data[i].first, relation->data[i].second);
-        }
-        printf("\b\b}.\n");
+        return a->second - b->second;
     }
 }
 
-void print_closure(const char *name, set_pair_int_t closure, set_pair_int_t relation) {
-    if (closure->size == 0) {
-        printf("%s = Ø.\n", name);
+void print_relation(const char *name, set_t *relation) {
+    if (set_size(relation) == 0) {
+        printf("%s = {}.\n", name);
     } else {
-        set_sort(closure);
+        set_sort(relation, comparPair);
         printf("%s = {", name);
-        for (size_t i = 0; i < closure->size; ++i) {
-            if (set_contains(relation, &closure->data[i])) {
-                printf("(%d, %d), ", closure->data[i].first, closure->data[i].second);
-            } else {
-                printf("\033[1m(%d, %d)\033[22m, ", closure->data[i].first, closure->data[i].second);
-            }
+        for (size_t i = 0; i < set_size(relation); i++) {
+            printf("(%d, %d), ", set_at_as(relation, i, pair_t).first, set_at_as(relation, i, pair_t).second);
         }
         printf("\b\b}.\n");
     }

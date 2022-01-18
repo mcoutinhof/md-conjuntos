@@ -5,6 +5,7 @@
 #pragma once
 
 #include <stdio.h>
+#include "set.h"
 
 #define max(a, b) ({      \
     __auto_type _a = (a); \
@@ -18,22 +19,10 @@
     _a < _b ? _a : _b;    \
 })
 
-typedef struct __set_int_t {
-    size_t capacity, size, type_size;
-    int *data;
-} *set_int_t;
-
-typedef struct __pair_int_t {
+typedef struct pair_t {
     int first, second;
-} pair_int_t;
+} pair_t;
 
-typedef struct __set_pair_int_t {
-    size_t capacity, size, type_size;
-    pair_int_t *data;
-} *set_pair_int_t;
+void print_set(const char *name, set_t *set);
 
-void print_set(const char *name, set_int_t set);
-
-void print_relation(const char *name, set_pair_int_t relation);
-
-void print_closure(const char *name, set_pair_int_t closure, set_pair_int_t relation);
+void print_relation(const char *name, set_t *relation);
