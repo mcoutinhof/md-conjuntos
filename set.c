@@ -42,7 +42,7 @@ size_t set_size(set_t *set) {
 
 void set_reserve(set_t *set, size_t req_capacity) {
     if (req_capacity > set->capacity) {
-        set->data = reallocarray(set->data, (set->capacity = req_capacity), set->type_size);
+        set->data = realloc(set->data, (set->capacity = req_capacity) * set->type_size);
     }
 }
 
@@ -52,7 +52,7 @@ size_t set_capacity(set_t *set) {
 
 void set_shrink_to_fit(set_t *set) {
     if (set->capacity > set->size) {
-        set->data = reallocarray(set->data, (set->capacity = set->size), set->type_size);
+        set->data = realloc(set->data, (set->capacity = set->size) * set->type_size);
     }
 }
 
